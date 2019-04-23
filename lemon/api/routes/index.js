@@ -22,10 +22,19 @@ router.post('/api/login', function(req, res, next) {
       })
     }else{
       if(result.length > 0){
+        /*
+        *筛选出需要返回的数据
+         */
+        let obj = {
+          id:result[0]._id,
+          name:result[0].name
+        }
+
+
         res.json({
           code:1,
           msg:"success",
-          data:result
+          data:obj
         })
       }else{
         res.json({

@@ -40,7 +40,7 @@ router.post('/api/login', function(req, res, next) {
         }
         res.json({
           code:1,
-          msg:"success",
+          msg:"登录成功",
           data:obj
         })
       }else{

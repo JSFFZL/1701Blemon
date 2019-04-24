@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css"/>
+	</head>
+	<body>
+
+		<!-- 登录页面 -->
+		<div class="login hide">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>用户名</label>
+					<input type="text" class="mui-input-clear txt" placeholder="请输入用户名">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" class="mui-input-password pwd" placeholder="请输入密码">
+				</div>
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary loginBtn">确认</button>
+					<button type="button" class="mui-btn mui-btn-danger">取消</button>
+				</div>
+			</form>
+		</div>
+
+
+		<!-- 账单页面 -->
+		<div class="mui-content">
+
+
+			<div class="wrapper hide">
+				
+				<!-- 主界面不动、菜单移动 -->
+				<!-- 侧滑导航根容器 -->
+				<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+					<!-- 菜单容器 -->
+					<aside class="mui-off-canvas-left" id="offCanvasSide">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!-- 菜单具体展示内容 -->
+
+							</div>
+						</div>
+					</aside>
+					<!-- 主页面容器 -->
+					<div class="mui-inner-wrap">
+						<div class="flex">
+							<header class="mui-bar mui-bar-nav header" style="position: relative !important">
+								<ul>
+									<li>月花费</li>
+									<li><span class="money">0.00</span> 元</li>
+									<li><span>月收入</span>：<span class="income">1000.00</span> 元</li>
+								</ul>
+								<div class="year">
+									<span class="yearTimer">月</span>
+									<span class="timer">2019-4-24</span>
+								</div>
+							</header>
+							<div class="tab">
+								<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide"></a>
+								<ul>
+									<li class="active">账单</li>
+									<li>图表</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="mui-content mui-scroll-wrapper top">
+							<div class="mui-scroll">
+								<!-- 主界面具体展示内容 -->
+								<ul class="mui-table-view list">
+									<!-- <li class="mui-table-view-cell li">
+										<div class="mui-slider-right mui-disabled">
+											<a class="mui-btn mui-btn-red delete">删除</a>
+										</div>
+										<div class="mui-slider-handle bill-item">
+											<dl>
+												<dt>
+													<span class="mui-icon mui-icon-weixin"></span>
+												</dt>
+												<dd>
+													<p>类型</p>
+													<p>时间</p>
+												</dd>
+											</dl>
+											<span class="red">20000</span>
+										</div>
+									</li> -->
+								</ul>
+							</div>
+						</div>
+						<nav class="mui-bar mui-bar-tab">
+							<a class="mui-tab-item mui-active">
+								<span class="mui-icon mui-icon-home"></span>
+								<span class="mui-tab-label">首页</span>
+							</a>
+							<a class="mui-tab-item">
+								<span class="mui-icon mui-icon-phone"></span>
+								<span class="mui-tab-label">电话</span>
+							</a>
+							<a class="mui-tab-item">
+								<span class="mui-icon mui-icon-email"></span>
+								<span class="mui-tab-label">邮件</span>
+							</a>
+							<a class="mui-tab-item exit">
+								<span class="mui-icon mui-icon-gear "></span>
+								<span class="mui-tab-label">退出</span>
+							</a>
+						</nav>
+						<div class="mui-off-canvas-backdrop"></div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+		<script src="js/libs/require.js" async defer type="text/javascript" charset="utf-8" data-main="./js/index"></script>
+	</body>
+</html>

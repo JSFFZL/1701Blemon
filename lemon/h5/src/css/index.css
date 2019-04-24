@@ -1,0 +1,157 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	list-style: none;
+}
+html,body{
+	height: 100%;
+}
+.mui-content{
+	height: 100%;
+}
+.wrapper{
+	height: 100%;
+}
+
+.hide{
+	display: none ;
+}
+
+.header{
+	height: 110px;
+	background: #ffe141;
+/* 	background:-webkit-linear-gradient(#f7800c, #ffe141);
+	background:linear-gradient(#f7800c, #ffe141); */
+	/* lin */
+}
+.top{
+	padding-top: 173px !important;
+}
+.lis{
+	padding: 20px !important;
+}
+
+.tab {
+	position: relative;
+	z-index: 3;
+	margin: 10px 0;
+}
+
+.tab ul {
+	width: 200px;
+	margin: auto;
+	display: flex;
+	border: solid #999 1px;
+}
+
+.tab ul li {
+	padding: 5px 0;
+	flex: 1;
+	text-align: center;
+}
+
+.active {
+	background: yellow;
+}
+.box {
+	position: relative;
+	top: 180px;
+	overflow: hidden;
+	background: #fff;
+	height: 100%;
+}
+
+.bill-item {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	background: #fff;
+}
+
+.bill-item dl {
+	display: flex;
+	align-items: center;
+}
+
+.bill-item dl dt {
+	background: yellow;
+	border-radius: 50%;
+	font-size: 12px;
+	padding: 4px;
+	margin-right: 10px;
+}
+
+.red {
+	color: red;
+	font-size: 18px;
+}
+
+.green {
+	color: green;
+	font-size: 18px;
+}
+
+.li {
+	padding-right: 10px !important;
+}
+.home {
+	height: 100%;
+}
+
+.box {
+	position: relative;
+	top: 180px;
+	overflow: hidden;
+	background: #fff;
+	height: 100%;
+}
+
+.bill-item {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	background: #fff;
+}
+.header {
+	/* position: relative !important; */
+	height: 120px;
+	background: yellow;
+	overflow: hidden;
+}
+
+.header ul {
+	margin-top: 10px;
+}
+
+.header ul li {
+	margin: 10px 0;
+}
+
+.header ul .money {
+	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 25px;
+}
+
+.year {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.year span {
+	padding: 6px;
+	border: solid #666 1px;
+	border-radius: 10px;
+}
+.classify{
+	font-size: 16px;
+	color: #000;
+	font-weight:bold ;
+}

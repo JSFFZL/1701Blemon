@@ -12,8 +12,6 @@ require.config({
 
 require(["mui", "picker"], function(mui, picker) {
 
-
-
 	//全局变量
 
 	//缓存的UID 
@@ -22,35 +20,45 @@ require(["mui", "picker"], function(mui, picker) {
 	var income = 0; //收入总金额
 	var picker;
 
+	var year = new Date().getFullYear();
+	var month = new Date().getMonth() + 1;
+	var windowTime = year + '-' + (month < 10 ? "0" + month : month); //显示的当前时间
+	// var windowTime = year + '-' + month; //显示的当前时间
+
+	document.querySelector(".timer").innerHTML = windowTime;
+	// console.log(windowTime);
+
 	function init() {
 		lisClik();
 		login();
 		user();
 		exit();
-		picker = new mui.DtPicker();
-// 		picker.show(function(selectItems) {
-// 			console.log(selectItems.y); //{text: "2016",value: 2016} 
-// 			console.log(selectItems.m); //{text: "05",value: "05"} 
-// 		})
-		
-		var popPicker = new mui.PopPicker();
-		popPicker.setData([{
-			value: 'zz',
-			text: '智子'
-		},
-		{
-			value: 'zz',
-			text: '智子00'
-		}]);
-		popPicker.show(function(selectItems) {
-			console.log(selectItems[0].text); //智子
-			console.log(selectItems[0].value); //zz 
-		})
+		timer();
+
+		picker = new mui.DtPicker({
+			"type": "month"
+		});
+
+	
+
+
+
 	}
 
 	//业务逻辑
-	function num() {
 
+	//选择时间
+	function timer() {
+		document.querySelector(".timer").addEventListener("tap", function() {
+			//显示日期插件
+			picker.show(function(t) {
+				let time = t.y.text + "-" + t.m.text; //获取选择的时间
+				// console.log(t.y.text + "-" + t.m.text); //{text: "2016",value: 2016} 
+				// 				console.log(selectItems.m); //{text: "05",value: "05"} 
+				document.querySelector(".timer").innerHTML = time;
+				getBill()
+			})
+		})
 	}
 
 
@@ -59,11 +67,15 @@ require(["mui", "picker"], function(mui, picker) {
 
 	//获取当前用户的账单信息
 	function getBill() {
+		let t = document.querySelector(".timer").innerHTML;
 		uid = localStorage.getItem("uid");
 		console.log(uid);
+		sum = 0;
+		income = 0;
 		mui.ajax('/api/getBill', {
 			data: {
-				uid: uid
+				uid: uid,
+				time: t
 			},
 			dataType: 'json', //服务器返回json格式数据
 			type: 'post', //HTTP请求类型
@@ -161,14 +173,10 @@ require(["mui", "picker"], function(mui, picker) {
 						document.querySelector(".wrapper").style.display = "none";
 						document.querySelector(".login").style.display = "block";
 					}
-
 				}
 			});
 		})
-
 	}
-
-
 	//删除账单的点击事件
 
 	function lisClik() {
@@ -191,12 +199,9 @@ require(["mui", "picker"], function(mui, picker) {
 						success: function(data) {
 							//删除节点
 							_this.parentNode.parentNode.remove();
+							getBill()
 						}
 					});
-
-
-
-
 				} else {
 					setTimeout(function() {
 						mui.swipeoutClose(li);

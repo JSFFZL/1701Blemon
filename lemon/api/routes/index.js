@@ -61,7 +61,8 @@ router.post('/api/login', function(req, res, next) {
  */
 router.post('/api/getBill', function(req, res, next) {
   let uid = req.body.uid;
-  mongo.find(db,bill,{"uid":uid},function(result){
+	let time = new RegExp(req.body.time); //  转 /2019-4/
+  mongo.find(db,bill,{"uid":uid,"time":time},function(result){
     if(!result){
       res.json({
         code:0,

@@ -19,6 +19,7 @@ require(["mui", "picker"], function(mui, picker) {
 	var sum = 0; //花费总金额
 	var income = 0; //收入总金额
 	var picker;
+	var popPicker;
 
 	var year = new Date().getFullYear();
 	var month = new Date().getMonth() + 1;
@@ -34,12 +35,27 @@ require(["mui", "picker"], function(mui, picker) {
 		user();
 		exit();
 		timer();
+		yearOrmonth()
 
+		//实例化 时间插件
 		picker = new mui.DtPicker({
-			"type": "month"
+			"type": "month" //完整日期视图(年月日时分)
 		});
 
-	
+		//实例化 选择器插件
+		popPicker = new mui.PopPicker();
+
+		//设置展示的值
+		popPicker.setData([{
+				value: 'year',
+				text: '年'
+			},
+			{
+				value: 'month',
+				text: '月'
+			}
+		]);
+
 
 
 
@@ -52,16 +68,64 @@ require(["mui", "picker"], function(mui, picker) {
 		document.querySelector(".timer").addEventListener("tap", function() {
 			//显示日期插件
 			picker.show(function(t) {
-				let time = t.y.text + "-" + t.m.text; //获取选择的时间
-				// console.log(t.y.text + "-" + t.m.text); //{text: "2016",value: 2016} 
-				// 				console.log(selectItems.m); //{text: "05",value: "05"} 
-				document.querySelector(".timer").innerHTML = time;
-				getBill()
+				let ym = document.querySelector(".yearTimer").innerHTML;
+				if (ym == "年") {
+					let time = t.y.text; //获取选择的时间
+					document.querySelector(".timer").innerHTML = time;
+					getBill()
+				}else{
+					let time = t.y.text + "-" + t.m.text; //获取选择的时间
+					document.querySelector(".timer").innerHTML = time;
+					getBill()
+				}
+
+
+
 			})
 		})
 	}
 
+	//选择 年/月
+	function yearOrmonth() {
+		document.querySelector(".yearTimer").addEventListener("tap", function() {
+			//通过自定义属性获取自定义属性
+			let tYear = document.querySelector("[data-id='title-y']");
+			let tMonth = document.querySelector("[data-id='title-m']");
 
+			let dYear = document.querySelector("[ data-id=picker-y]");
+			let dMonth = document.querySelector("[ data-id=picker-m]");
+
+			// console.log(dYear);
+
+			//显示 年/月 选择器
+			popPicker.show(function(ym) {
+				// 				console.log(ym[0].text); //
+				// 				console.log(ym[0].value); //
+				document.querySelector(".yearTimer").innerHTML = ym[0].text;
+				
+				if (ym[0].text == "年") {
+					// 视图的title
+					tMonth.style.display = "none";
+					tYear.style.width = "100%";
+
+					//视图的数据
+					dYear.style.width = "100%";
+					dMonth.style.display = "none";
+					document.querySelector(".timer").innerHTML = year; //系统年
+					getBill()
+				} else {
+					// 视图的title
+					tMonth.style.display = "inline-block";
+					tYear.style.width = "50%";
+					//视图的数据
+					dYear.style.width = "50%";
+					dMonth.style.display = "inline-block";
+					document.querySelector(".timer").innerHTML = windowTime; //系统年/月
+					getBill()
+				}
+			})
+		})
+	}
 
 
 
@@ -70,8 +134,8 @@ require(["mui", "picker"], function(mui, picker) {
 		let t = document.querySelector(".timer").innerHTML;
 		uid = localStorage.getItem("uid");
 		console.log(uid);
-		sum = 0;
-		income = 0;
+		sum = 0; //花费总金额
+		income = 0; //收入总金额
 		mui.ajax('/api/getBill', {
 			data: {
 				uid: uid,
@@ -81,36 +145,43 @@ require(["mui", "picker"], function(mui, picker) {
 			type: 'post', //HTTP请求类型
 			timeout: 10000, //超时时间设置为10秒；
 			success: function(res) {
-				var str = '';
-				res.data.forEach(function(item) {
+				if (res.data.length === 0) {
+					document.querySelector(".billTils").style.display = "block";
+					document.querySelector(".list").style.display = "none";
+				} else {
+					document.querySelector(".billTils").style.display = "none";
+					document.querySelector(".list").style.display = "block";
+					var str = '';
+					res.data.forEach(function(item) {
+						if (item.style == '支出') {
+							sum += (item.money) * 1
+						} else {
+							income += (item.money) * 1
+						}
+						str +=
+							`<li class="mui-table-view-cell li">
+									<div class="mui-slider-right mui-disabled">
+										<a class="mui-btn mui-btn-red delete" data-id="${item._id}">删除</a>
+									</div>
+									<div class="mui-slider-handle bill-item">
+										<dl>
+											<dt>
+												<span class="${item.icon}"></span>
+											</dt>
+											<dd>
+												<p class="classify">${item.classify}</p>
+												<p>${item.time}</p>
+											</dd>
+										</dl>
+										<span class="${item.style=="支出" ? 'red' : 'green'}">${item.money}</span>
+									</div>
+								</li>`
+					})
+					document.querySelector(".list").innerHTML = str;
+				}
+				document.querySelector(".money").innerHTML = sum; //花费
+				document.querySelector(".income").innerHTML = income; //收入
 
-					if (item.style == "支出") {
-						sum += (item.money) * 1;
-					} else {
-						income += (item.money) * 1;
-					}
-					str +=
-						`<li class="mui-table-view-cell li">
-								<div class="mui-slider-right mui-disabled">
-									<a class="mui-btn mui-btn-red delete" data-id="${item._id}">删除</a>
-								</div>
-								<div class="mui-slider-handle bill-item">
-									<dl>
-										<dt>
-											<span class="${item.icon}"></span>
-										</dt>
-										<dd>
-											<p class="classify">${item.classify}</p>
-											<p>${item.time}</p>
-										</dd>
-									</dl>
-									<span class="${item.style=="支出" ? 'red' : 'green'}">${item.money}</span>
-								</div>
-							</li>`
-				})
-				document.querySelector(".list").innerHTML = str;
-				document.querySelector(".money").innerHTML = sum;
-				document.querySelector(".income").innerHTML = income;
 			}
 		});
 	}
@@ -199,7 +270,7 @@ require(["mui", "picker"], function(mui, picker) {
 						success: function(data) {
 							//删除节点
 							_this.parentNode.parentNode.remove();
-							getBill()
+							getBill() //获取一下账单
 						}
 					});
 				} else {

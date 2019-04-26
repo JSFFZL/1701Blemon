@@ -35,7 +35,8 @@ require(["mui", "picker"], function(mui, picker) {
 		user();
 		exit();
 		timer();
-		yearOrmonth()
+		yearOrmonth();
+		addBill();
 
 		//实例化 时间插件
 		picker = new mui.DtPicker({
@@ -282,6 +283,13 @@ require(["mui", "picker"], function(mui, picker) {
 
 			})
 			// console.log(this);
+		})
+	}
+	
+	// 跳转添加账单页面
+	function addBill(){
+		document.querySelector(".fixe").addEventListener("tap",function(){
+			location.href = "../html/classify.html"
 		})
 	}
 

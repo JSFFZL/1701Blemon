@@ -103,6 +103,28 @@ router.post('/api/deltBill', function(req, res, next) {
 });
 
 
+/*
+	* 根据用户查询收支的具体类别
+ */
+router.post('/api/getClass', function(req, res, next) {
+		let cify = req.body.cify;
+		let id = req.body.uid;
+		mongo.find(db,classify,{"uid":id,"style":cify},function(result){
+				  if(!result){
+				  res.json({
+				    code:0,
+				    msg:"查询失败！"
+				  })
+				}else{
+				  res.json({
+				    code:1,
+				    msg:"查询成功！",
+				    data:result
+				  })
+				}
+		})
+});
+
 
 
 

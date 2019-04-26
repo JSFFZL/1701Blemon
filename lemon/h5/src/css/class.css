@@ -1,0 +1,151 @@
+html, body, h5, h1, h3, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  list-style: none; }
+
+.header {
+  width: 100%;
+  height: 100px;
+  background: yellow; }
+
+.header .h-top {
+  width: 100%;
+  height: 40px;
+  padding-top: 7px; }
+
+.header .h-top .tab-list {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.header .h-top .tab-list span {
+  flex: 1;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px; }
+
+.header .h-top .tab-list span.active {
+  background: #000;
+  color: yellow; }
+
+.header .mui-icon-back {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  line-height: 40px;
+  display: block; }
+
+.h-btm {
+  margin: 10px 15px;
+  height: 40px;
+  border-bottom: 1px solid gray;
+  text-align: center; }
+
+.h-btm span {
+  line-height: 40px;
+  border-right: 1px solid gray; 
+  font-size: 24px;
+}
+
+.mui-slider-item > div {
+  display: flex;
+  flex-wrap: wrap; }
+
+.mui-slider-item > div dl {
+  width: 25%;
+  margin-top: 10px; }
+
+.mui-slider-item > div dl dt {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  text-align: center;
+  line-height: 40px;
+  margin: 0 auto; }
+
+.mui-slider-item > div dl dd {
+  width: 50px;
+  margin: 0 auto;
+  text-align: center; }
+
+.mui-slider-item > div dl.elect dt {
+  background: yellow; }
+	
+.elect {
+  background: yellow; 
+}
+
+.timer {
+  padding-left: 15px;
+  margin-top: 10px; }
+
+.keyword {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0; }
+
+.keyword ul {
+  width: 100%;
+  border-top: 1px solid gray;
+  border-right: 1px solid gray;
+  display: flex; }
+
+.keyword ul li {
+  width: 25%;
+  text-align: center; }
+
+.keyword ul li span {
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray; }
+
+.keyword ul li:last-child {
+  height: 160px;
+  line-height: 160px;
+  border-bottom: 1px solid gray; }
+
+.keywords {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+  .keywords ul {
+    width: 100%;
+    padding: 0 !important;
+    margin: 0;
+    display: flex; }
+    .keywords ul li {
+      flex: 1;
+      text-align: center;
+      border-top: solid #000 1px;
+      border-left: solid #000 1px; }
+      .keywords ul li span {
+        display: block;
+        height: 50px;
+        line-height: 50px;
+        border-left: solid #000 1px;
+        border-top: solid #000 1px; }
+
+.ok {
+  height: 200px;
+  line-height: 200px; }
+
+.choose-time{
+	font-size: 16px;
+}

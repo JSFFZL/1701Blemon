@@ -162,3 +162,15 @@ html,body{
 	font-size: 18px;
 	text-align: center;
 }
+.fixe{
+	position: fixed;
+	z-index:99;
+	bottom: 60px;
+	left: 50%;
+	/* top: 50%; */
+	/* margin-left: -30px; */
+	transform: translateX(-50%);
+}
+.fixe span{
+	font-size: 60px;
+}
